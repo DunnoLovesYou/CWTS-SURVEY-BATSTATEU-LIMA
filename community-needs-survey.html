@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Community Needs Assessment Survey Form</title>
+<style>
+:root{--ink:#111;--mute:#666;--line:#ddd;--acc:#b3202a;--bg:#fff}
+*{box-sizing:border-box}
+body{margin:0;background:#f6f6f6;color:var(--ink);font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+.wrap{max-width:820px;margin:0 auto;padding:24px 16px 80px}
+header{text-align:center;padding:24px 0 8px}
+header .a{font-size:13px;color:var(--mute)}
+header .b{font-size:22px;font-weight:700;letter-spacing:.5px}
+header .c{color:var(--acc);font-weight:600}
+header .d{font-weight:600}
+header .e{margin-top:14px;font-weight:600}
+h1{font-size:20px;text-align:center;margin:18px 0 4px}
+h1 i{display:block;font-size:14px;font-weight:400;color:var(--mute)}
+section{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:20px;margin:16px 0}
+h2{font-size:17px;margin:0 0 14px;padding-bottom:8px;border-bottom:2px solid var(--acc)}
+h2 i,.q i,.op i,th i{display:block;font-weight:400;color:var(--mute);font-size:13px;font-style:italic}
+h3{font-size:15px;margin:18px 0 6px}
+h3 i{display:block;font-weight:400;color:var(--mute);font-size:13px}
+.f{margin:0 0 20px}
+.q{font-weight:600;margin-bottom:6px}
+.hint{color:var(--mute);font-size:13px}
+.op{display:flex;gap:8px;align-items:flex-start;padding:4px 0;cursor:pointer}
+.op input[type=radio],.op input[type=checkbox]{margin-top:5px;accent-color:var(--acc)}
+.op span{flex:1}
+.oth{border:0;border-bottom:1px solid #999;padding:2px 4px;width:160px;margin-left:6px;font:inherit;background:transparent}
+input[type=text],textarea{width:100%;border:1px solid #bbb;border-radius:6px;padding:8px;font:inherit}
+textarea{min-height:90px;resize:vertical}
+input:focus,textarea:focus{outline:2px solid var(--acc);outline-offset:0}
+.scroll{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{border:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+th{background:#fafafa}
+td.c,th.c{text-align:center;width:54px}
+td.c input{accent-color:var(--acc);width:16px;height:16px}
+.scale{margin:6px 0 12px;padding-left:20px}
+.top3 div{display:flex;gap:8px;align-items:center;margin-bottom:8px}
+.bar{position:sticky;bottom:0;background:#fff;border-top:1px solid var(--line);padding:12px;display:flex;gap:10px;justify-content:center}
+button{font:inherit;border:1px solid var(--ink);background:#fff;padding:10px 18px;border-radius:8px;cursor:pointer}
+button.p{background:var(--acc);border-color:var(--acc);color:#fff;font-weight:600}
+.end{text-align:center;color:var(--mute);font-size:14px}
+.end b{color:var(--ink)}
+.note{color:var(--mute);font-size:13px;margin:4px 0 0}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="a">Republic of the Philippines</div>
+  <div class="b">BATANGAS STATE UNIVERSITY</div>
+  <div class="c">The National Engineering University</div>
+  <div class="d">LIMA Campus</div>
+  <div class="e">Office of the National Service Training Program</div>
+</header>
+<h1>Community Needs Assessment Survey Form<i>(Talatanungan Para Sa Pagtatasa Ng Pangangailangan Ng Pamayanan)</i></h1>
+<form id="form" autocomplete="off"></form>
+<section class="end" id="endsec"></section>
+</div>
+<div class="bar">
+  <button type="button" id="reset">Reset</button>
+  <button type="button" class="p" id="dl">Download Summary (PNG)</button>
+</div>
+
+<script>
+const OTH='*';
+const DPS_EN=["In compliance with Republic Act No. 10173, otherwise known as the Data Privacy Act of 2012, the information collected through this Community Needs Assessment Survey shall be processed responsibly, fairly, and lawfully.","The information you provide will be used solely for community profiling, needs assessment, research, extension planning, and the development of appropriate programs, projects, and activities that address the needs and priorities of the community."];
+const DPS_TL=["Alinsunod sa Republic Act No. 10173 o mas kilala bilang Data Privacy Act of 2012, ang mga impormasyong makakalap sa pamamagitan ng Talatanungang ito para sa Pagtatasa ng Pangangailangan ng Pamayanan ay pangangasiwaan at poprosesuhin nang responsable, makatarungan, at naaayon sa batas.","Ang mga impormasyong inyong ibibigay ay gagamitin lamang para sa pagbuo ng profile ng pamayanan, pagtatasa ng mga pangangailangan, pananaliksik, pagpaplano ng mga programang pang-extension, at pagbuo ng mga angkop na programa, proyekto, at aktibidad na tutugon sa mga pangangailangan at prayoridad ng pamayanan."];
+const INTRO_EN=["This survey aims to determine the current conditions, needs, concerns, and priorities of the community. The information gathered will serve as a basis for developing appropriate programs, projects, and activities that address the actual needs of residents and contribute to sustainable community development.","Your participation is voluntary. All information provided will be treated with confidentiality and used solely for community assessment, planning, research, and development purposes. Please answer each question honestly based on your experiences and observations."];
+const INTRO_TL=["Ang talatanungang ito ay naglalayong matukoy ang kasalukuyang kalagayan, pangangailangan, suliranin, at mga prayoridad ng pamayanan. Ang mga impormasyong makakalap ay magsisilbing batayan sa pagbuo ng mga angkop na programa, proyekto, at gawain na tutugon sa tunay na pangangailangan ng mga residente at makatutulong sa patuloy na pag-unlad ng pamayanan.","Ang inyong pakikilahok ay kusang-loob. Ang lahat ng impormasyong inyong ibibigay ay pananatilihing kumpidensyal at gagamitin lamang para sa pagtatasa, pagpaplano, pananaliksik, at pagpapaunlad ng pamayanan. Mangyaring sagutin nang tapat ang bawat katanungan batay sa inyong karanasan at obserbasyon."];
+
+const S=[
+{h:"Data Privacy Statement",pre:'dps',items:[
+ {id:'consent',t:'single',q:"Please check the appropriate box to indicate your decision. | Lagyan ng tsek ang naaangkop na kahon upang ipahayag ang inyong pasya.",
+  o:["I agree | Sumasang-ayon ako.","I do not agree | Hindi ako sumasang-ayon."]}
+]},
+{h:"Introduction | Panimula",pre:'intro',items:[]},
+{h:"I. Respondent's General Information | Pangkalahatang Impormasyon ng Respondente",items:[
+ {id:'name',t:'text',q:"Name of Respondent (Optional) | Pangalan ng Respondente (Opsyonal)"},
+ {id:'age',t:'single',q:"Age | Edad",o:["18–24 years old","25–40 years old","41–59 years old","60 years old and above"]},
+ {id:'sex',t:'single',q:"Sex Assigned at Birth | Kasarian noong Kapanganakan",o:["Male | Lalaki","Female | Babae"]},
+ {id:'civil',t:'single',q:"Civil Status | Katayuang Sibil",o:["Single | Walang asawa","Married | May asawa","Widowed | Balo","Separated | Hiwalay","Others | Iba pa"+OTH]},
+ {id:'brgy',t:'text',q:"Barangay/Purok/Sitio of Residence | Barangay/Purok/Sitio na Tinitirhan"},
+ {id:'resid',t:'single',q:"How long have you been residing in the community? | Gaano na kayo katagal naninirahan sa pamayanan?",o:["Less than 1 year | Wala pang isang taon","1–5 years | 1–5 taon","6–10 years | 6–10 taon","11–20 years | 11–20 taon","More than 20 years | Higit sa 20 taon"]}
+]},
+{h:"II. Household And Socioeconomic Profile | Kalagayan Ng Sambahayan At Kabuhayan",items:[
+ {id:'liveli',t:'single',q:"What is your primary source of livelihood? | Ano ang pangunahing pinagkukunan ninyo ng kabuhayan?",o:["Farming | Pagsasaka","Fishing | Pangingisda","Government employment | Pagtatrabaho sa pamahalaan","Private sector employment | Pagtatrabaho sa pribadong sektor","Self-employed or small business | Sariling negosyo o maliit na kabuhayan","Daily wage or contractual work | Arawang sahod o kontraktuwal na trabaho","Overseas employment | Pagtatrabaho sa ibang bansa","Unemployed | Walang trabaho","Others | Iba pa"+OTH]},
+ {id:'income',t:'single',q:"What is your estimated monthly household income? | Magkano ang tinatayang buwanang kita ng inyong sambahayan?",o:["Below ₱5,000 | Mas mababa sa ₱5,000","₱5,001–₱10,000","₱10,001–₱20,000","₱20,001–₱30,000","₱30,001–₱50,000","Above ₱50,000 | Higit sa ₱50,000","Prefer not to disclose | Hindi nais ibahagi"]},
+ {id:'house',t:'single',q:"What is your current housing arrangement? | Ano ang kasalukuyang kalagayan ng inyong tirahan?",o:["Owned house and lot | Sariling bahay at lupa","Owned house, rented lot | Sariling bahay ngunit inuupahan ang lupa","Renting | Nangungupahan","Living with relatives | Nakikitira sa kamag-anak","Informal or temporary settlement | Pansamantala o hindi pormal na tirahan","Others | Iba pa"+OTH]},
+ {id:'svc',t:'yn',q:"Which of the following basic services are accessible to your household? | Alin sa mga sumusunod na pangunahing serbisyo ang naa-access ng inyong sambahayan?",
+  col:"Basic Services | Pangunahing Serbisyo",
+  rows:["Safe and potable drinking water | Malinis at ligtas na inuming tubig","Electricity | Kuryente","Sanitation and toilet facilities | Palikuran at sanitasyon","Waste collection and disposal | Pangongolekta at pagtatapon ng basura","Internet connectivity | Koneksyon sa internet","Mobile communication signal | Signal ng cellphone","Public transportation | Pampublikong transportasyon","Health services | Serbisyong pangkalusugan"]}
+]},
+{h:"III. Assessment of Community Needs and Conditions | Pagtatasa sa Kalagayan at Pangangailangan ng Pamayanan",items:[
+ {id:'rate',t:'rate',q:"How would you assess the current condition of the following community services and facilities? | Paano ninyo ilalarawan ang kasalukuyang kalagayan ng mga sumusunod na serbisyo at pasilidad sa inyong pamayanan?",
+  scale:["5 – Very Good | Napakahusay","4 – Good | Mahusay","3 – Fair | Katamtaman","2 – Poor | Mahina","1 – Very Poor | Napakahina"],
+  note:"Please select one rating for each item | Pumili ng isang marka para sa bawat aytem.",
+  groups:[
+  {h:"1. Health and Nutrition | Kalusugan at Nutrisyon",r:["Access to healthcare services | Pagkakaroon ng serbisyong pangkalusugan","Maternal and child healthcare | Pangangalaga sa kalusugan ng ina at bata","Nutrition and food security | Nutrisyon at sapat na pagkain"]},
+  {h:"2. Education And Skills Development | Edukasyon at Pagpapaunlad ng Kasanayan",r:["Access to educational opportunities | Pagkakaroon ng oportunidad sa edukasyon","Technical and vocational training | Pagsasanay sa teknikal at bokasyonal na kasanayan","Digital literacy and computer skills | Kasanayan sa paggamit ng teknolohiya at kompyuter"]},
+  {h:"3. Livelihood and Economic Development | Kabuhayan at Pag-Unlad ng Ekonomiya",r:["Employment opportunities | Oportunidad sa trabaho","Livelihood assistance and support | Tulong at suporta sa kabuhayan","Agricultural and fisheries development | Pagpapaunlad ng agrikultura at pangisdaan","Entrepreneurship and business development | Pagnenegosyo at pagpapaunlad ng negosyo"]},
+  {h:"4. Environment and Natural Resources | Kapaligiran at Likas na Yaman",r:["Solid waste management | Wastong pamamahala ng basura","Clean water and sanitation | Malinis na tubig at sanitasyon","Environmental protection | Pangangalaga sa kapaligiran","Climate change adaptation | Paghahanda at pag-angkop sa pagbabago ng klima"]},
+  {h:"5. Disaster Risk Reduction and Management | Pagbabawas ng Panganib at Pamamahala sa Sakuna",r:["Disaster preparedness and awareness | Kaalaman at kahandaan sa sakuna","Emergency response services | Serbisyo sa pagtugon sa emerhensiya","First aid and basic life support training | Pagsasanay sa paunang lunas at basic life support"]},
+  {h:"6. Social Welfare and Inclusion | Kapakanang Panlipunan at Pagkakapantay-Pantay",r:["Support for senior citizens | Suporta para sa mga nakatatanda","Support for persons with disabilities | Suporta para sa mga taong may kapansanan","Youth development programs | Mga programa para sa pagpapaunlad ng kabataan","Women's empowerment programs | Mga programa para sa pagpapalakas ng kakayahan ng kababaihan","Support for vulnerable households | Suporta para sa mga pamilyang higit na nangangailangan"]}
+ ]}
+]},
+{h:"IV. Identification and Prioritization of Community Needs | Pagtukoy at Pagpapriyoridad sa mga Pangangailangan ng Pamayanan",items:[
+ {id:'areas',t:'multi',max:5,q:"Which of the following areas require immediate attention or intervention in your community? Select up to FIVE (5). | Alin sa mga sumusunod na larangan ang nangangailangan ng agarang pansin o interbensiyon sa inyong pamayanan? Pumili ng hanggang LIMA (5).",
+  o:["Health and medical services | Serbisyong medikal at pangkalusugan","Nutrition and food security | Nutrisyon at sapat na pagkain","Technical and vocational skills training | Pagsasanay sa teknikal at bokasyonal na kasanayan","Digital literacy and technology training | Pagsasanay sa digital literacy at teknolohiya","Livelihood and employment opportunities | Kabuhayan at oportunidad sa trabaho","Environmental protection and conservation | Pangangalaga at konserbasyon ng kapaligiran","Solid waste management | Wastong pamamahala ng basura","Disaster preparedness and emergency response | Kahandaan sa sakuna at pagtugon sa emerhensiya","Youth development and leadership | Pagpapaunlad at pamumuno ng kabataan","Women's empowerment and gender equality | Pagpapalakas sa kababaihan at pagkakapantay-pantay ng kasarian","Senior citizen and PWD assistance | Tulong para sa mga nakatatanda at taong may kapansanan","Governance and public service improvement | Pagpapaunlad ng pamamahala at serbisyong pampubliko"]},
+ {id:'top3',t:'top3',q:"Among the concerns identified above, what are your TOP THREE (3) most urgent needs? | Sa mga nabanggit na suliranin, ano ang TATLONG (3) pinakamahalagang pangangailangan na dapat unahing tugunan?"},
+ {id:'problems',t:'area',q:"What are the major problems or challenges currently experienced by your household or community? | Ano ang mga pangunahing suliranin o hamong kasalukuyang nararanasan ng inyong sambahayan o pamayanan?"},
+ {id:'affected',t:'multi',q:"Who are the most affected by these challenges? Select all that apply. | Sino-sino ang higit na naaapektuhan ng mga suliraning ito? Piliin ang lahat ng naaangkop.",
+  o:["Children | Mga bata","Youth | Kabataan","Women | Kababaihan","Senior citizens | Mga nakatatanda","Persons with disabilities | Mga taong may kapansanan","Farmers and fisherfolk | Mga magsasaka at mangingisda","Low-income households | Mga pamilyang may mababang kita","Unemployed individuals | Mga walang trabaho","Entire community | Buong pamayanan","Others | Iba pa"+OTH]}
+]},
+{h:"V. Preferred Community Development Programs | Mga nais na Programa para sa Pagpapaunlad ng Pamayanan",items:[
+ {id:'progs',t:'progs',q:"What programs or interventions would you like to see implemented in your community? Select all that apply. | Anong mga programa o tulong ang nais ninyong maisakatuparan sa inyong pamayanan? Piliin ang lahat ng naaangkop.",
+  groups:[
+  {h:"A. Health and Nutrition | Kalusugan at Nutrisyon",o:["Medical and dental missions | Medical at dental mission","Health awareness seminars | Mga seminar tungkol sa kalusugan","Nutrition and feeding programs | Mga programa sa nutrisyon at pagpapakain","Maternal and child health education | Edukasyon tungkol sa kalusugan ng ina at bata"]},
+  {h:"B. Education and Skills Development | Edukasyon at Pagpapaunlad ng Kasanayan",o:["Basic literacy and numeracy programs | Mga programa sa pagbasa, pagsulat, at pagbibilang","Technical and vocational training | Pagsasanay sa teknikal at bokasyonal na kasanayan","Digital literacy and computer training | Pagsasanay sa digital literacy at paggamit ng kompyuter"]},
+  {h:"C. Livelihood and Economic Development | Kabuhayan at Pagpapaunlad ng Ekonomiya",o:["Livelihood skills training | Pagsasanay para sa kabuhayan","Entrepreneurship and business management | Pagnenegosyo at pamamahala ng negosyo","Financial literacy and management | Kaalaman at wastong pamamahala sa pananalapi"]},
+  {h:"D. Environment and Sustainability | Kapaligiran at Pagpapanatili ng Likas na Yaman",o:["Tree planting and environmental conservation | Pagtatanim ng puno at pangangalaga sa kapaligiran","Waste segregation and recycling | Paghihiwalay at muling paggamit ng basura","Community gardening | Paghahalaman sa pamayanan","Water conservation and resource management | Pagtitipid ng tubig at pangangalaga sa likas na yaman"]},
+  {h:"E. Disaster Preparedness | Kahandaan sa Sakuna",o:["Disaster risk reduction awareness | Pagpapalawak ng kaalaman tungkol sa pagbabawas ng panganib sa sakuna","Basic life support and first aid training | Pagsasanay sa basic life support at paunang lunas","Emergency preparedness and response | Paghahanda at pagtugon sa emerhensiya","Climate change adaptation | Paghahanda at pag-angkop sa pagbabago ng klima"]},
+  {h:"F. Governance and Social Development | Pamamahala at Pagpapaunlad ng Lipunan",o:["Leadership and community organizing | Pamumuno at pag-oorganisa ng pamayanan","Volunteerism and civic engagement | Pagboboluntaryo at pakikilahok sa mga gawaing sibiko","Gender and development awareness | Kamalayan sa kasarian at kaunlaran","Youth leadership and development | Pamumuno at pagpapaunlad ng Kabataan"]}
+  ]},
+ {id:'progoth',t:'text',q:"G. Others | Iba Pa"},
+ {id:'specific',t:'area',q:"a. What specific training, seminar, or assistance would be most beneficial to you and your household? | Anong partikular na pagsasanay, seminar, o tulong ang higit na makatutulong sa inyo at sa inyong sambahayan?"}
+]},
+{h:"VI. Community Participation And Accessibility | Pakikilahok at Pagiging Madaling Maa-Access ng Mga Programa",items:[
+ {id:'willing',t:'single',q:"Are you willing to participate in community development programs and activities? | Handa ba kayong makilahok sa mga programa at gawaing naglalayong mapaunlad ang pamayanan?",o:["Yes | Oo","No | Hindi","Maybe | Maaaring oo"]},
+ {id:'mode',t:'multi',q:"What is your preferred mode of participation? Select all that apply. | Paano ninyo nais makilahok sa mga programa at gawain ng pamayanan? Piliin ang lahat ng naaangkop.",o:["Attend seminars and training | Dumalo sa mga seminar at pagsasanay","Participate in community activities | Makilahok sa mga gawaing pampamayanan","Volunteer in community projects | Magboluntaryo sa mga proyekto ng pamayanan","Join community organizations | Sumali sa mga organisasyon sa pamayanan","Others | Iba pa"+OTH]}
+]},
+{h:"VII. Additional Comments and Recommendations | Karagdagang Komento at mga Mungkahi",items:[
+ {id:'comments',t:'area',q:"a. What other concerns or needs should be addressed to improve the quality of life in your community? | Ano pa ang ibang mga suliranin o pangangailangan na dapat matugunan upang mapabuti ang kalidad ng buhay sa inyong pamayanan?"}
+]}
+];
+
+const END_EN="Thank you for taking the time to participate in this Community Needs Assessment Survey. Your insights, experiences, and recommendations are valuable in ensuring that future community programs and projects are responsive, inclusive, sustainable, and aligned with the actual needs and aspirations of the people.";
+const END_TL="Maraming salamat sa paglalaan ng inyong oras upang lumahok sa Talatanungang ito para sa Pagtatasa ng Pangangailangan ng Pamayanan. Ang inyong mga pananaw, karanasan, at mungkahi ay mahalaga upang matiyak na ang mga susunod na programa at proyekto ay tumutugon sa tunay na pangangailangan, nagtataguyod ng pagkakaisa at pagkakapantay-pantay, at sumusuporta sa pangmatagalang pag-unlad ng pamayanan.";
+
+const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');
+const sp=s=>{const i=s.indexOf(' | ');return i<0?[s,'']:[s.slice(0,i),s.slice(i+3)]};
+const bi=s=>{const [a,b]=sp(s);return esc(a)+(b?`<i>${esc(b)}</i>`:'')};
+
+function opt(type,name,raw,extra=''){
+  let oth=false; if(raw.endsWith(OTH)){oth=true;raw=raw.slice(0,-1);}
+  const [en,tl]=sp(raw);
+  return `<label class="op"><input type="${type}" name="${name}" value="${esc(en)}" data-other="${oth?1:0}" ${extra}><span>${esc(en)}${tl?`<i>${esc(tl)}</i>`:''}${oth?'<input type="text" class="oth" aria-label="Others">':''}</span></label>`;
+}
+
+function renderItem(it){
+  let h=`<div class="f" data-item="${it.id}"><div class="q">${bi(it.q)}</div>`;
+  if(it.t==='text')h+=`<input type="text" name="${it.id}">`;
+  else if(it.t==='area')h+=`<textarea name="${it.id}"></textarea>`;
+  else if(it.t==='single')h+=it.o.map(o=>opt('radio',it.id,o)).join('');
+  else if(it.t==='multi')h+=it.o.map(o=>opt('checkbox',it.id,o,it.max?`data-max="${it.max}"`:'')).join('');
+  else if(it.t==='top3')h+=`<div class="top3">${[1,2,3].map(n=>`<div>${n}.<input type="text" name="${it.id}${n}"></div>`).join('')}</div>`;
+  else if(it.t==='yn'){
+    h+=`<div class="scroll"><table><tr><th>${bi(it.col)}</th><th class="c">Yes<i>Oo</i></th><th class="c">No<i>Hindi</i></th></tr>`+
+    it.rows.map((r,i)=>`<tr><td>${bi(r)}</td><td class="c"><input type="radio" name="${it.id}${i}" value="Yes"></td><td class="c"><input type="radio" name="${it.id}${i}" value="No"></td></tr>`).join('')+`</table></div>`;
+  }
+  else if(it.t==='rate'){
+    h+=`<p class="hint" style="margin:0">Rating Scale | Sukatan ng Pagtatasa:</p><ul class="scale">${it.scale.map(s=>`<li>${bi(s)}</li>`).join('')}</ul><p class="hint">${esc(sp(it.note)[0])} / ${esc(sp(it.note)[1])}</p>`;
+    it.groups.forEach((g,gi)=>{
+      h+=`<div class="scroll" style="margin-bottom:14px"><table><tr><th>${bi(g.h)}</th>${[5,4,3,2,1].map(n=>`<th class="c">${n}</th>`).join('')}</tr>`+
+      g.r.map((r,ri)=>`<tr><td>${gi+1}.${ri+1}. ${bi(r)}</td>${[5,4,3,2,1].map(n=>`<td class="c"><input type="radio" name="rate_${gi}_${ri}" value="${n}"></td>`).join('')}</tr>`).join('')+`</table></div>`;
+    });
+  }
+  else if(it.t==='progs'){
+    it.groups.forEach((g,gi)=>{h+=`<h3>${bi(g.h)}</h3>`+g.o.map(o=>opt('checkbox','prog_'+gi,o)).join('');});
+  }
+  return h+'</div>';
+}
+
+const form=document.getElementById('form');
+form.innerHTML=S.map(s=>{
+  let h=`<section><h2>${bi(s.h)}</h2>`;
+  if(s.pre==='dps')h+=DPS_EN.map(p=>`<p>${esc(p)}</p>`).join('')+DPS_TL.map(p=>`<p><i style="color:#666">${esc(p)}</i></p>`).join('');
+  if(s.pre==='intro')h+=INTRO_EN.map(p=>`<p>${esc(p)}</p>`).join('')+INTRO_TL.map(p=>`<p><i style="color:#666">${esc(p)}</i></p>`).join('');
+  h+=s.items.map(renderItem).join('')+'</section>';
+  return h;
+}).join('');
+document.getElementById('endsec').innerHTML=`<h2 style="text-align:left">End of Survey | Wakas ng Talatanungan</h2><p>${esc(END_EN)}</p><p><i>${esc(END_TL)}</i></p><p><b>Together, Let Us Build Empowered, Resilient, And Sustainable Communities.</b><br><i>Sama-Sama Nating Itaguyod Ang Isang Maunlad, Matatag, At Sustenableng Pamayanan.</i></p>`;
+
+/* max selection */
+form.addEventListener('change',e=>{
+  const t=e.target;
+  if(t.type==='checkbox'&&t.dataset.max){
+    const all=[...form.querySelectorAll(`[name="${t.name}"]`)];
+    const n=all.filter(x=>x.checked).length, m=+t.dataset.max;
+    all.forEach(x=>{x.disabled=(n>=m&&!x.checked)});
+  }
+});
+/* focus other text → check its box */
+form.addEventListener('input',e=>{
+  if(e.target.classList.contains('oth')){
+    const cb=e.target.closest('label').querySelector('input:not(.oth)');
+    if(e.target.value&&!cb.checked){cb.checked=true;cb.dispatchEvent(new Event('change',{bubbles:true}));}
+  }
+});
+document.getElementById('reset').onclick=()=>{
+  if(!confirm('Reset all answers?'))return;
+  form.reset();form.querySelectorAll('input').forEach(x=>x.disabled=false);
+};
+
+/* collect */
+const ans=n=>[...form.querySelectorAll(`[name="${n}"]:checked`)].map(e=>{
+  let v=e.value;
+  if(e.dataset.other==='1'){const t=e.closest('label').querySelector('.oth').value.trim();if(t)v+=': '+t;}
+  return v;});
+const txt=n=>(form.querySelector(`[name="${n}"]`)?.value||'').trim();
+
+function collect(){
+  const B=[];
+  B.push({k:'sec',t:'I. Respondent\'s General Information'});
+  S.forEach(s=>{
+    const secName=sp(s.h)[0];
+    if(!s.items.length)return;
+    B.push({k:'sec',t:secName});
+    s.items.forEach(it=>{
+      const q=sp(it.q)[0];
+      if(it.t==='text'||it.t==='area')B.push({k:'qa',q,a:[txt(it.id)]});
+      else if(it.t==='single'||it.t==='multi')B.push({k:'qa',q,a:ans(it.id)});
+      else if(it.t==='top3')B.push({k:'qa',q,a:[1,2,3].map(n=>txt(it.id+n)?n+'. '+txt(it.id+n):'')});
+      else if(it.t==='yn'){
+        B.push({k:'q',q});
+        it.rows.forEach((r,i)=>B.push({k:'row',l:sp(r)[0],v:ans(it.id+i)[0]||''}));
+      }
+      else if(it.t==='rate'){
+        B.push({k:'q',q});
+        it.groups.forEach((g,gi)=>{
+          B.push({k:'sub',t:sp(g.h)[0]});
+          g.r.forEach((r,ri)=>B.push({k:'row',l:`${gi+1}.${ri+1}. ${sp(r)[0]}`,v:ans(`rate_${gi}_${ri}`)[0]||''}));
+        });
+      }
+      else if(it.t==='progs'){
+        B.push({k:'q',q});
+        it.groups.forEach((g,gi)=>{
+          B.push({k:'sub',t:sp(g.h)[0]});
+          const a=ans('prog_'+gi);
+          B.push({k:'list',a});
+        });
+      }
+    });
+  });
+  return B;
+}
+
+/* draw */
+const FONT='system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif';
+function wrap(ctx,text,maxW){
+  const out=[];
+  String(text).split('\n').forEach(par=>{
+    let line='';
+    par.split(' ').forEach(w=>{
+      const t=line?line+' '+w:w;
+      if(ctx.measureText(t).width>maxW&&line){out.push(line);line=w;}else line=t;
+    });
+    out.push(line);
+  });
+  return out;
+}
+function layout(ctx,W,draw,B){
+  const P=48,CW=W-P*2,ACC='#b3202a',INK='#111',MUTE='#666';
+  let y=40;
+  const center=(t,font,color,gap)=>{ctx.font=font;ctx.fillStyle=color;ctx.textAlign='center';if(draw)ctx.fillText(t,W/2,y+parseInt(font.match(/(\d+)px/)[1]));y+=gap;ctx.textAlign='left';};
+  center('Republic of the Philippines',`13px ${FONT}`,MUTE,20);
+  center('BATANGAS STATE UNIVERSITY',`bold 24px ${FONT}`,INK,32);
+  center('The National Engineering University',`600 14px ${FONT}`,ACC,20);
+  center('LIMA Campus',`600 14px ${FONT}`,INK,24);
+  center('Office of the National Service Training Program',`600 14px ${FONT}`,INK,36);
+  center('Community Needs Assessment Survey Form',`bold 20px ${FONT}`,INK,30);
+  if(draw){ctx.fillStyle=ACC;ctx.fillRect(P,y,CW,2);} y+=22;
+
+  const text=(t,font,color,x,maxW,lh)=>{
+    ctx.font=font;ctx.fillStyle=color;
+    wrap(ctx,t,maxW).forEach(l=>{ if(draw)ctx.fillText(l,x,y+lh-5); y+=lh;});
+  };
+  B.forEach(b=>{
+    if(b.k==='sec'&&b.t==="I. Respondent's General Information"&&B.indexOf(b)===0){return;}
+    if(b.k==='sec'){
+      y+=14;
+      if(draw){ctx.fillStyle=ACC;ctx.fillRect(P,y,4,22);}
+      ctx.font=`bold 16px ${FONT}`;ctx.fillStyle=INK;
+      if(draw)ctx.fillText(b.t,P+14,y+17);
+      y+=34;
+    }
+    else if(b.k==='qa'){
+      text(b.q,`600 13px ${FONT}`,MUTE,P,CW,19);
+      const a=b.a.filter(Boolean);
+      if(!a.length)text('—',`15px ${FONT}`,'#aaa',P+12,CW-12,22);
+      else a.forEach(x=>text(x,`15px ${FONT}`,INK,P+12,CW-12,22));
+      y+=8;
+    }
+    else if(b.k==='q'){text(b.q,`600 13px ${FONT}`,MUTE,P,CW,19);y+=2;}
+    else if(b.k==='sub'){y+=4;text(b.t,`600 14px ${FONT}`,INK,P+12,CW-12,20);}
+    else if(b.k==='row'){
+      ctx.font=`14px ${FONT}`;
+      const vw=90,lines=wrap(ctx,b.l,CW-40-vw);
+      lines.forEach((l,i)=>{ if(draw){ctx.fillStyle=INK;ctx.textAlign='left';ctx.fillText(l,P+24,y+16);
+        if(i===0){ctx.textAlign='right';ctx.font=`600 14px ${FONT}`;ctx.fillStyle=b.v?INK:'#aaa';ctx.fillText(b.v||'—',P+CW,y+16);ctx.textAlign='left';ctx.font=`14px ${FONT}`;}
+      } y+=20;});
+    }
+    else if(b.k==='list'){
+      if(!b.a.length)text('—',`14px ${FONT}`,'#aaa',P+24,CW-24,20);
+      else b.a.forEach(x=>text('• '+x,`14px ${FONT}`,INK,P+24,CW-36,20));
+      y+=2;
+    }
+  });
+  y+=24;
+  if(draw){ctx.fillStyle='#ddd';ctx.fillRect(P,y,CW,1);}
+  y+=26;
+  center('Leading Innovations, Transforming Lives, Building the Nation',`italic 600 13px ${FONT}`,ACC,28);
+  return y+16;
+}
+
+document.getElementById('dl').onclick=()=>{
+  const B=collect(),W=1000,sc=2;
+  const c=document.createElement('canvas');
+  const m=c.getContext('2d');
+  const H=layout(m,W,false,B);
+  c.width=W*sc;c.height=H*sc;
+  const ctx=c.getContext('2d');
+  ctx.scale(sc,sc);
+  ctx.fillStyle='#fff';ctx.fillRect(0,0,W,H);
+  ctx.textBaseline='alphabetic';
+  layout(ctx,W,true,B);
+  c.toBlob(b=>{
+    const a=document.createElement('a');
+    a.href=URL.createObjectURL(b);
+    a.download='community-needs-assessment-summary.png';
+    document.body.appendChild(a);a.click();a.remove();
+    setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+  },'image/png');
+};
+</script>
+</body>
+</html>
